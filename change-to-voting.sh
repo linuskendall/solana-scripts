@@ -1,15 +1,36 @@
 #!/usr/bin/env bash
 
+XDG_RUNTIME_DIR="/run/user/$(id -u solana)"
+
+NO_VOTING_SERVICE_STATUS=$(systemctl --user is-active solana-no-voting)
+VOTING_SERVICE_STATUS=$(systemctl --user is-active solana)
+
 set -o errexit
 set -o nounset
 set -o pipefail
+
+if [ ! "${USER}" = "solana" ]; then
+   echo "ERROR: This script should be run as the solana user."
+   exit 1
+fi
+
+if [ "${VOTING_SERVICE_STATUS}" = "active" ]; then
+    echo "ERROR: This machine is currently running a voting service. This is probably not the command you want to use"
+    exit 1  
+fi
+
+if [ ! "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
+    echo "ERROR: The solana no voting service is not active. Use start-voting.sh instead."
+    exit 1
+fi
 
 echo "WARNING: ONLY DO THIS ON NON VOTING NODE TO START IT IN VOTING MODE"
 read -p "Have you stopped any other voting validators? This will start voting validator on ${HOSTNAME}. " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-	    exit 1
+	echo "Canceling..."
+	exit 1
 fi
 
 echo "Waiting for snapshot"

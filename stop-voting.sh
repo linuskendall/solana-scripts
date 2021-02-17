@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+XDG_RUNTIME_DIR="/run/user/$(id -u solana)"
+
 set -o errexit
 set -o nounset
 set -o pipefail
+
+if [ ! "${USER}" = "solana" ]; then
+   echo "ERROR: This script should be run as the solana user."
+   exit 1
+fi
 
 echo "WARNING: THIS WILL LEAD TO VOTING VALIDATOR DOWNTIME"
 read -p "Are you sure you want to stop the voting validator on ${HOSTNAME}? " -n 1 -r
