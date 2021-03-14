@@ -14,6 +14,9 @@ if [ ! "${USER}" = "solana" ]; then
    exit 1
 fi
 
+# Makes ure unit files are reloaded
+systemctl --user daemon-reload
+
 if [ "${VOTING_SERVICE_STATUS}" = "active" ]; then
     VALIDATOR_TYPE="VOTING"
     UNIT_NAME=solana

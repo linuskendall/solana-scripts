@@ -24,6 +24,9 @@ else
     exit 1
 fi
 
+# Makes ure unit files are reloaded
+systemctl --user daemon-reload
+
 echo "WARNING: THIS WILL LEAD TO ${VALIDATOR_TYPE} VALIDATOR DOWNTIME"
 read -p "Are you sure you want to stop the ${VALIDATOR_TYPE} validator on ${HOSTNAME}? " -n 1 -r
 echo    # (optional) move to a new line

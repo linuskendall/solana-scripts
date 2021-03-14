@@ -24,7 +24,6 @@ if [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
     exit 1
 fi
 
-
 echo "WARNING: MAKE SURE THAT NO OTHER VOTING VALIDATOR IS RUNNING"
 read -p "Are you sure you want to start the voting validator on ${HOSTNAME}? " -n 1 -r
 echo    # (optional) move to a new line
@@ -32,6 +31,9 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
 	    exit 1
 fi
+
+# Makes ure unit files are reloaded
+systemctl --user daemon-reload
 
 start=$(date +%s.%N)
 

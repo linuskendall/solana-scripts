@@ -24,6 +24,9 @@ if [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
     exit 1
 fi
 
+# Makes ure unit files are reloaded
+systemctl --user daemon-reload
+
 start=$(date +%s.%N)
 
 echo -n "Starting NON-VOTING validator, time="
