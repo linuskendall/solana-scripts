@@ -12,9 +12,7 @@ These commands will wait for an report on catch up.
 
 To follow logs: `journalctl --user -u solana -f`
 
-To stop non voting validator use: `/home/solana/bin/stop-non-voting.sh`
-
-To stop voting validator use: `/home/solana/bin/stop-voting.sh`
+To stop validator use: `/home/solana/bin/stop.sh`
 
 Both will require confirmation before the stop.
 
@@ -22,9 +20,7 @@ Both will require confirmation before the stop.
 
 The restart scripts will wait until a snapshot has been created before actually executing the restart.
 
-To restart non voting validator use: `/home/solana/bin/restart-non-voting.sh`
-
-To restart voting validator use: `/home/solana/bin/restart-voting.sh`
+To restart validator use: `/home/solana/bin/restart.sh`
 
 You will need to confirm restart of voting validator by pressing "y" on the prompt.
 
@@ -36,7 +32,7 @@ All commands to be run as the solana user. The old node is the old validator nod
 
 If the previous machine is running, then on the old voting node:
 
-1. Stop solana on the old machine: `/home/solana/bin/stop-voting.sh`
+1. Stop solana on the old machine (voting): `/home/solana/bin/stop.sh`
 
 2. Stop the tower syncing (comment out in crontab): `crontab -e`
 
@@ -66,6 +62,6 @@ This should only be done if the node has not been running in hot-standby/non-vot
 
 # Logs
 
-
 To follow logs: `journalctl --user -u solana -f`
-To get logs over a specific time frame :
+
+To get logs over a specific time frame : `journalctl --user -u solana --since "<timespec>" --until "<timespec>"`

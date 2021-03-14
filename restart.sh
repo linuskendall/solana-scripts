@@ -14,18 +14,21 @@ if [ ! "${USER}" = "solana" ]; then
    exit 1
 fi
 
-if [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
-   echo "ERROR: This machine is currently running a non-voting service. Use restart-non-voting.sh instead."
-   exit 1
+if [ "${VOTING_SERVICE_STATUS}" = "active" ]; then
+    VALIDATOR_TYPE="VOTING"
+    UNIT_NAME=solana
+elif [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
+    VALIDATOR_TYPE="NON-VOTING"
+    UNIT_NAME=solana-no-voting
+else
+    echo "ERROR: The solana service is currently not running. Use start.sh instead."
+    echo "Voting status: " ${VOTING_SERVICE_STATUS}
+    echo "No voting status: " ${NO_VOTING_SERVICE_STATUS}
+    exit 1
 fi
 
-if [ ! "${VOTING_SERVICE_STATUS}" = "active" ]; then
-    echo "ERROR: This machine is currently not running a voting service. Use start-voting.sh instead."
-    exit 1  
-fi
-
-echo "WARNING: THIS WILL LEAD TO VOTING VALIDATOR DOWNTIME"
-read -p "Are you sure you want to restart the voting validator on ${HOSTNAME}? " -n 1 -r
+echo "WARNING: THIS WILL LEAD TO ${VALIDATOR_TYPE} VALIDATOR DOWNTIME"
+read -p "Are you sure you want to restart the ${VALIDATOR_TYPE} validator on ${HOSTNAME}? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
@@ -42,7 +45,7 @@ start=$(date +%s.%N)
 
 echo -n "Starting restart, time="
 date 
-systemctl --user restart solana
+systemctl --user restart ${UNIT_NAME}
 
 echo -n "Waiting for the RPC service to come back up"
 

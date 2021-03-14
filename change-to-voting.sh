@@ -25,6 +25,7 @@ if [ ! "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
 fi
 
 echo "WARNING: ONLY DO THIS ON NON VOTING NODE TO START IT IN VOTING MODE"
+
 read -p "Have you stopped any other voting validators? This will start voting validator on ${HOSTNAME}. " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]

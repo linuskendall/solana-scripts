@@ -12,4 +12,5 @@ echo -n "Starting sync on "
 date
 
 rsync -avh -e ssh --progress /solana/ledger/tower-DDnAqxJVFo2GVTujibHt5cjevHMSE9bo8HJaydHoshdp.bin solana-lax:/solana/ledger
+
 echo
