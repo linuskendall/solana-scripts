@@ -19,11 +19,6 @@ if [ "${VOTING_SERVICE_STATUS}" = "active" ]; then
     exit 1
 fi
 
-if [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
-    echo "ERROR: The solana no voting service is active. Use restart.sh instead or if needed stop-non-voting.sh"
-    exit 1
-fi
-
 # Makes ure unit files are reloaded
 systemctl --user daemon-reload
 
