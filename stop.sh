@@ -41,7 +41,7 @@ read -p "Would you like to wait for a snapshot before stopping? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 then
-  grep -m1 'snapshot-' < <(inotifywait -m -e moved_to /solana/ledger) 
+  grep -m1 'snapshot-' < <(inotifywait -m -e moved_to /solana/snapshots) 
 fi
 
 systemctl --user stop ${UNIT_NAME}
