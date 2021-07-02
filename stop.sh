@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 XDG_RUNTIME_DIR="/run/user/$(id -u solana)"
+VOTING_SERVICE_STATUS=$(systemctl --user is-active solana)
+NO_VOTING_SERVICE_STATUS=$(systemctl --user is-active solana-no-voting)
 
 set -o errexit
 set -o nounset
