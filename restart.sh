@@ -42,7 +42,7 @@ echo "Checking that we're caught up"
 solana catchup --our-localhost
 
 echo "Waiting for snapshot"
-grep -m1 'snapshot-' < <(inotifywait -m -e moved_to /solana/ledger) 
+grep -m1 'snapshot-' < <(inotifywait -m -e moved_to /solana/snapshots) 
 
 start=$(date +%s.%N)
 
