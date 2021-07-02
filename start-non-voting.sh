@@ -15,12 +15,12 @@ if [ ! "${USER}" = "solana" ]; then
 fi
 
 if [ "${VOTING_SERVICE_STATUS}" = "active" ]; then
-    echo "ERROR: The solana voting service is active. Use restart-voting.sh instead or if needed stop-voting.sh."
+    echo "ERROR: The solana voting service is active. Use restart.sh instead or if needed stop-voting.sh."
     exit 1
 fi
 
 if [ "${NO_VOTING_SERVICE_STATUS}" = "active" ]; then
-    echo "ERROR: The solana no voting service is active. Use restart-no-voting.sh instead or if needed stop-non-voting.sh"
+    echo "ERROR: The solana no voting service is active. Use restart.sh instead or if needed stop-non-voting.sh"
     exit 1
 fi
 
